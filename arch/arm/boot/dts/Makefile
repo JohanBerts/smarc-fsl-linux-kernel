@@ -384,11 +384,13 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
 	imx6dl-smarcfimx6-xga.dtb \
 	imx6dl-smarcfimx6-wxga.dtb \
 	imx6dl-smarcfimx6-1080p.dtb \
+	imx6dl-smarcfimx6-jupiter.dtb \
        	imx6q-smarcfimx6.dtb \
        	imx6q-smarcfimx6-wvga.dtb \
        	imx6q-smarcfimx6-xga.dtb \
        	imx6q-smarcfimx6-wxga.dtb \
        	imx6q-smarcfimx6-1080p.dtb \
+	imx6q-smarcfimx6-jupiter.dtb \
         imx6qp-smarcfimx6.dtb \
         imx6qp-smarcfimx6-wvga.dtb \
         imx6qp-smarcfimx6-xga.dtb \

@@ -1,0 +1,43 @@
+/*
+ * Copyright (C) 2017 Matthews Swedot
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ */
+
+#include "imx6dl-smarcfimx6.dts"
+
+/ {
+	model = "SMARC-Jupiter Board";
+};
+
+// The Display pins are set in u-boot, 0x80000000 means do not change
+&pinctrl_hog {
+	fsl,pins = <
+		MX6QDL_PAD_NANDF_D6__GPIO2_IO06      0x80000000
+        MX6QDL_PAD_NANDF_D3__GPIO2_IO03      0x80000000
+        MX6QDL_PAD_NANDF_D7__GPIO2_IO07      0x80000000
+        MX6QDL_PAD_SD1_DAT3__GPIO1_IO21      0x80000000
+		MX6QDL_PAD_NANDF_CS1__GPIO6_IO14     0x80000000
+		MX6QDL_PAD_NANDF_CLE__GPIO6_IO07     0x80000000
+		MX6QDL_PAD_NANDF_D4__GPIO2_IO04      0x80000000
+		MX6QDL_PAD_NANDF_D0__GPIO2_IO00      0x80000000
+		MX6QDL_PAD_NANDF_D5__GPIO2_IO05      0x80000000
+	>;
+};
+
+// The touch screen controller
+&i2c31 {
+	edt-ft5x06@38 {
+		reg = <0x38>;
+		compatible = "edt,edt-ft5406";
+		reset-gpios = <&gpio2 3 GPIO_ACTIVE_LOW>;
+		pinctrl-names = "default";
+		interrupt-parent = <&gpio2>;
+		interrupts = <7 IRQ_TYPE_EDGE_RISING>;
+		touchscreen-size-x = <800>;
+		touchscreen-size-y = <480>;
+	};
+};
+
