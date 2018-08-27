@@ -24,33 +24,17 @@
 };
 
 // The touch screen controller
-	//i2c@f9927000 {
 &i2c31 {
-	focaltech@38 {
-		compatible = "focaltech,fts";
-		reg = <0x38>;
-		interrupt-parent = <&gpio2>;
-		interrupts = <7 IRQ_TYPE_EDGE_RISING>;
-        focaltech,panel-type = <FT5426>;
-		focaltech,reset-gpio = <&gpio2 3 GPIO_ACTIVE_LOW>;
-		focaltech,irq-gpio = <&gpio2 7 IRQ_TYPE_EDGE_RISING>;
-		focaltech,max-touch-number = <5>;
-		focaltech,display-coords =  <0 0 800 480>;
-	};
-};
-	
-/*	
-	&i2c31 {
 	edt-ft5x06@38 {
 		reg = <0x38>;
 		compatible = "edt,edt-ft5406";
 		reset-gpios = <&gpio2 3 GPIO_ACTIVE_LOW>;
 		pinctrl-names = "default";
 		interrupt-parent = <&gpio2>;
-		interrupts = <7 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <7 IRQ_TYPE_EDGE_FALLING>;
 		touchscreen-size-x = <800>;
 		touchscreen-size-y = <480>;
 	};
 };
-*/
+
 
