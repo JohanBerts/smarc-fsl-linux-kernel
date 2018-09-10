@@ -387,7 +387,7 @@
                 #size-cells = <0>;
                 reg = <0x70>;
 
-                        i2c@0 {
+                        i2c30: i2c@0 {
                                 #address-cells = <1>;
                                 #size-cells = <0>;
                                 compatible = "nxp,pca954x-bus";

@@ -37,4 +37,12 @@
 	};
 };
 
+// The RTC circuit on the display board
+&i2c30 {
+	ds1338@68 {
+		reg = <0x68>;
+		compatible = "maxim,ds1338";
+		status = "okay";
+	};
+};
 
