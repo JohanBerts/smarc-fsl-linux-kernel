@@ -53,6 +53,8 @@ struct imx_chip {
 
 	void __iomem	*mmio_base;
 
+    unsigned long prev_duty_cycles;
+
 	struct pwm_chip	chip;
 
 	int (*config)(struct pwm_chip *chip,
@@ -137,6 +139,8 @@ static int imx_pwm_config_v2(struct pwm_chip *chip,
 			if (fifoav == (sr & MX3_PWMSR_FIFOAV_MASK))
 				dev_warn(dev, "there is no free FIFO slot\n");
 		}
+		else
+			writel(imx->prev_duty_cycles, imx->mmio_base + MX3_PWMSAR);
 	} else {
 		writel(MX3_PWMCR_SWR, imx->mmio_base + MX3_PWMCR);
 		do {
@@ -172,6 +176,7 @@ static int imx_pwm_config_v2(struct pwm_chip *chip,
 
 	writel(duty_cycles, imx->mmio_base + MX3_PWMSAR);
 	writel(period_cycles, imx->mmio_base + MX3_PWMPR);
+	imx->prev_duty_cycles = duty_cycles;
 
 	cr = MX3_PWMCR_PRESCALER(prescale) |
 		MX3_PWMCR_DOZEEN | MX3_PWMCR_WAITEN |
@@ -314,6 +319,7 @@ static int imx_pwm_probe(struct platform_device *pdev)
 	data = of_id->data;
 	imx->config = data->config;
 	imx->set_enable = data->set_enable;
+	imx->prev_duty_cycles = 0;
 
 	ret = pwmchip_add(&imx->chip);
 	if (ret < 0)
